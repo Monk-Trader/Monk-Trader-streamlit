@@ -168,14 +168,16 @@ st.sidebar.metric(
     f"{current_alloc:.0f}%"
 )
 
+current_adx = df['ADX'].iloc[-1]
+
 if current_adx < 20:
-    adx_state = "Weak Trend"
+    trend_strength = "Weak"
 
 elif current_adx < 25:
-    adx_state = "Moderate Trend"
+    trend_strength = "Moderate"
 
 else:
-    adx_state = "Strong Trend"
+    trend_strength = "Strong"
 
 st.sidebar.metric(
     "Current ADX",
