@@ -1,7 +1,12 @@
 import streamlit as st
+from datetime import datetime
 
-st.title("Hello World of Internet")
+st.title("Monk Trader Quant Lab")
 
-st.write("My first website is live.")
+st.write("Welcome to my first financial research website.")
 
-st.write("Created by Monk Trader")
+st.subheader("Current Time")
+
+st.write(datetime.now())
+
+st.success("Website is running successfully.")
