@@ -186,8 +186,6 @@ st.sidebar.metric(
     current_regime
 )
 
-st.sidebar.markdown("---")
-
 st.sidebar.write(
     f"Since: {regime_start_date.strftime('%Y-%m-%d')}"
 )
