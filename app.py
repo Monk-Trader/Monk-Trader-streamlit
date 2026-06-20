@@ -12,7 +12,26 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🚀 NIFTY Asset Allocation Engine")
+st.title(
+    "🚀 Monk Trader Quant Lab"
+)
+
+st.caption(
+    "Institutional Asset Allocation & Risk Regime Dashboard"
+)
+# =====================================
+# VISITOR COUNTER
+# =====================================
+
+try:
+    counter_url = "https://api.counterapi.dev/v1/monktrader/nifty_dashboard/up"
+
+    response = requests.get(counter_url, timeout=5)
+
+    visitor_count = response.json()["count"]
+
+except:
+    visitor_count = "N/A"
 
 
 @st.cache_data(ttl=3600)
@@ -117,6 +136,47 @@ current_regime = state_map[df['Regime'].iloc[-1]]
 
 current_alloc = (
     df['Target_Equity_Weight'].iloc[-1] * 100
+)
+
+# =====================================
+# SIDEBAR DASHBOARD
+# =====================================
+
+st.sidebar.title("📊 Dashboard Status")
+
+# Current Regime
+st.sidebar.metric(
+    "Current Regime",
+    current_regime
+)
+
+# Allocation
+st.sidebar.metric(
+    "Equity Allocation",
+    f"{current_alloc:.0f}%"
+)
+
+# Visitor Count
+st.sidebar.metric(
+    "Visitors",
+    visitor_count
+)
+
+# Last Updated
+st.sidebar.markdown("---")
+
+st.sidebar.subheader("⏰ Last Updated")
+
+st.sidebar.write(
+    datetime.now().strftime(
+        "%d-%b-%Y %H:%M:%S"
+    )
+)
+
+st.sidebar.markdown("---")
+
+st.sidebar.success(
+    "Engine Operational"
 )
 
 st.subheader("📊 Bear State Capture Diagnostic Audit")
