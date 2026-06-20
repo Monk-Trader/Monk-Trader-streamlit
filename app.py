@@ -186,6 +186,17 @@ st.sidebar.metric(
     current_regime
 )
 
+st.sidebar.markdown("---")
+
+st.sidebar.write(
+    f"Since: {regime_start_date.strftime('%Y-%m-%d')}"
+)
+
+st.sidebar.write(
+    f"Days: {days_in_regime}"
+)
+
+
 # Allocation
 st.sidebar.metric(
     "Equity Allocation",
@@ -210,22 +221,6 @@ st.sidebar.metric(
 
 st.sidebar.write(
     f"Trend Strength: {trend_strength}"
-)
-
-st.sidebar.markdown("---")
-
-st.sidebar.subheader("Current Regime")
-
-st.sidebar.write(
-    f"**{current_regime}**"
-)
-
-st.sidebar.write(
-    f"Since: {regime_start_date.strftime('%Y-%m-%d')}"
-)
-
-st.sidebar.write(
-    f"Days: {days_in_regime}"
 )
 
 
