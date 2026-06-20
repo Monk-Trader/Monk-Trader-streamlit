@@ -181,10 +181,10 @@ else:
 
 st.sidebar.metric(
     "Current ADX",
-    f"{current_adx:.1f}"
+    f"{trend_strength:.1f}"
 )
 
-st.sidebar.caption(adx_state)
+st.sidebar.caption(trend_strength)
 
 # Visitor Count
 st.sidebar.metric(
