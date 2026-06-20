@@ -413,7 +413,6 @@ fig.update_yaxes(
 
 fig.update_yaxes(
     title_text="Allocation %",
-    range=[0, 2],
     row=2,
     col=1
 )
