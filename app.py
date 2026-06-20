@@ -10,7 +10,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🚀 NIFTY 50 Production Asset Allocation Engine")
+st.title("🚀 NIFTY Asset Allocation Engine")
 
 
 @st.cache_data(ttl=3600)
@@ -200,7 +200,7 @@ st.dataframe(
 # =====================================
 # CHARTS
 # =====================================
-st.subheader("📈 Interactive NIFTY Risk Regime Dashboard")
+st.subheader("📈NIFTY Risk Regime")
 
 fig = make_subplots(
     rows=2,
@@ -209,7 +209,7 @@ fig = make_subplots(
     vertical_spacing=0.08,
     row_heights=[0.7, 0.3],
     subplot_titles=(
-        "NIFTY 50 Risk Regimes",
+        "NIFTY Risk Regimes",
         "Institutional Asset Allocation"
     )
 )
