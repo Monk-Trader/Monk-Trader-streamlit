@@ -37,6 +37,12 @@ except:
 
 
 @st.cache_data(ttl=3600)
+
+@st.cache_data
+def load_strong_stocks():
+
+    return pd.read_csv("Strong_Stocks.csv")
+    
 def get_data():
     df = yf.download("^NSEI", start="2013-01-01", progress=False)
 
@@ -415,6 +421,18 @@ fig.update_yaxes(
 st.plotly_chart(
     fig,
     use_container_width=True
+)
+
+st.markdown("---")
+
+st.header("🏆 Top Strong Stocks")
+
+strong_stocks = load_strong_stocks()
+
+st.dataframe(
+    strong_stocks,
+    use_container_width=True,
+    hide_index=True
 )
 
 # =====================================
