@@ -151,6 +151,24 @@ bear_return = np.exp(
 
 current_regime = state_map[df['Regime'].iloc[-1]]
 
+# =====================================
+# LAST REGIME CHANGE
+# =====================================
+
+current_regime_code = df['Regime'].iloc[-1]
+
+regime_start_date = df.index[-1]
+
+for i in range(len(df)-2, -1, -1):
+
+    if df['Regime'].iloc[i] != current_regime_code:
+        regime_start_date = df.index[i+1]
+        break
+
+days_in_regime = (
+    df.index[-1] - regime_start_date
+).days
+
 current_alloc = (
     df['Target_Equity_Weight'].iloc[-1] * 100
 )
@@ -192,6 +210,22 @@ st.sidebar.metric(
 
 st.sidebar.write(
     f"Trend Strength: {trend_strength}"
+)
+
+st.sidebar.markdown("---")
+
+st.sidebar.subheader("Current Regime")
+
+st.sidebar.write(
+    f"**{current_regime}**"
+)
+
+st.sidebar.write(
+    f"Since: {regime_start_date.strftime('%Y-%m-%d')}"
+)
+
+st.sidebar.write(
+    f"Days: {days_in_regime}"
 )
 
 
