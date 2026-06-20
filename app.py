@@ -2,8 +2,8 @@ import streamlit as st
 import yfinance as yf
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 st.set_page_config(
     page_title="Monk Trader Quant Lab",
@@ -200,103 +200,127 @@ st.dataframe(
 # =====================================
 # CHARTS
 # =====================================
+st.subheader("📈 Interactive NIFTY Risk Regime Dashboard")
 
-st.subheader("📈 NIFTY Risk Regime Dashboard")
-
-fig, (ax1, ax2) = plt.subplots(
-    2,
-    1,
-    figsize=(14, 8),
-    sharex=True,
-    gridspec_kw={
-        'height_ratios': [2, 1]
-    }
+fig = make_subplots(
+    rows=2,
+    cols=1,
+    shared_xaxes=True,
+    vertical_spacing=0.08,
+    row_heights=[0.7, 0.3],
+    subplot_titles=(
+        "NIFTY 50 Risk Regimes",
+        "Institutional Asset Allocation"
+    )
 )
 
-ax1.set_yscale('log')
-
-ax1.yaxis.set_major_formatter(
-    plt.ScalarFormatter()
-)
-
-ax1.yaxis.set_minor_formatter(
-    plt.NullFormatter()
-)
+# =====================================
+# REGIME SCATTERS
+# =====================================
 
 for state_code, state_name in state_map.items():
 
     mask = df['Regime'] == state_code
 
-    ax1.scatter(
-        df.index[mask],
-        df['Close'][mask],
-        color=color_map[state_code],
-        s=5,
-        label=state_name,
-        alpha=0.8
+    fig.add_trace(
+
+        go.Scatter(
+
+            x=df.index[mask],
+
+            y=df['Close'][mask],
+
+            mode='markers',
+
+            name=state_name,
+
+            marker=dict(
+                size=5,
+                color=color_map[state_code]
+            ),
+
+            hovertemplate=
+            "<b>Date:</b> %{x}<br>" +
+            "<b>NIFTY:</b> %{y:,.0f}<br>" +
+            "<b>State:</b> " + state_name +
+            "<extra></extra>"
+
+        ),
+
+        row=1,
+        col=1
+
     )
 
-ax1.set_title(
-    "NIFTY 50 Risk Regimes"
+# =====================================
+# ALLOCATION LINE
+# =====================================
+
+fig.add_trace(
+
+    go.Scatter(
+
+        x=df.index,
+
+        y=df['Target_Equity_Weight'] * 100,
+
+        mode='lines',
+
+        name='Equity Allocation',
+
+        hovertemplate=
+        "<b>Date:</b> %{x}<br>" +
+        "<b>Allocation:</b> %{y:.0f}%<extra></extra>"
+
+    ),
+
+    row=2,
+    col=1
+
 )
 
-ax1.set_ylabel(
-    "Index Value (Log Scale)"
+# =====================================
+# LAYOUT
+# =====================================
+
+fig.update_layout(
+
+    height=850,
+
+    title="Monk Trader Asset Allocation Engine",
+
+    hovermode='x unified',
+
+    template='plotly_dark',
+
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="left",
+        x=0
+    )
+
 )
 
-ax1.grid(
-    True,
-    linestyle="--",
-    alpha=0.3
+fig.update_yaxes(
+    type="log",
+    title_text="NIFTY",
+    row=1,
+    col=1
 )
 
-ax1.legend()
-
-# --------------------
-
-ax2.plot(
-    df.index,
-    df['Target_Equity_Weight'] * 100,
-    linewidth=1.5
+fig.update_yaxes(
+    title_text="Allocation %",
+    range=[0, 2],
+    row=2,
+    col=1
 )
 
-ax2.fill_between(
-    df.index,
-    df['Target_Equity_Weight'] * 100,
-    0,
-    alpha=0.2
+st.plotly_chart(
+    fig,
+    use_container_width=True
 )
-
-ax2.set_title(
-    "Institutional Asset Allocation"
-)
-
-ax2.set_ylabel(
-    "Allocation %"
-)
-
-ax2.set_ylim(
-    -5,
-    105
-)
-
-ax2.grid(
-    True,
-    linestyle="--",
-    alpha=0.4
-)
-
-ax2.xaxis.set_major_locator(
-    mdates.YearLocator()
-)
-
-ax2.xaxis.set_major_formatter(
-    mdates.DateFormatter('%Y')
-)
-
-plt.tight_layout()
-
-st.pyplot(fig)
 
 # =====================================
 # FOOTER
