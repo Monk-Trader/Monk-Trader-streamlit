@@ -188,7 +188,6 @@ st.sidebar.write(
     f"Trend Strength: {trend_strength}"
 )
 
-st.sidebar.caption(trend_strength)
 
 # Visitor Count
 st.sidebar.metric(
