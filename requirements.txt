@@ -4,4 +4,4 @@ numpy
 pandas
 plotly
 requests
-pip install ta
+ta
