@@ -1,12 +1,13 @@
 import streamlit as st
-from datetime import datetime
+import random
 
 st.title("Monk Trader Quant Lab")
 
-st.write("Welcome to my first financial research website.")
+atr_percentile = random.randint(1, 100)
 
-st.subheader("Current Time")
+st.metric("ATR Percentile", atr_percentile)
 
-st.write(datetime.now())
-
-st.success("Website is running successfully.")
+if atr_percentile > 70:
+    st.error("Risk-Off Regime")
+else:
+    st.success("Risk-On Regime")
