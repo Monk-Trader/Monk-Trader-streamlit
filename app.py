@@ -180,8 +180,8 @@ else:
     trend_strength = "Strong"
 
 st.sidebar.metric(
-    "Current ADX",
-    f"{trend_strength:.1f}"
+    "Trend Strength",
+    trend_strength
 )
 
 st.sidebar.caption(trend_strength)
