@@ -451,11 +451,34 @@ st.markdown("---")
 
 st.header("🏆 Top Strong Stocks")
 st.markdown("---")
-st.header("TradingView Test")
+st.header("📈 TradingView Widget Test")
 
-components.iframe(
-    "https://www.tradingview.com/chart/?symbol=NSE%3ASBIN",
-    height=700
+components.html(
+"""
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+
+  <script type="text/javascript"
+  src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+  async>
+  {
+    "symbols": [
+      [
+        "State Bank",
+        "NSE:SBIN|1D"
+      ]
+    ],
+    "chartOnly": false,
+    "width": "100%",
+    "height": "500",
+    "locale": "en",
+    "colorTheme": "dark",
+    "autosize": true
+  }
+  </script>
+</div>
+""",
+height=550
 )
 
 strong_stocks = load_strong_stocks()
