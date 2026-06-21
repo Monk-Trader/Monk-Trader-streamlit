@@ -464,9 +464,6 @@ strong_stocks = load_strong_stocks()
 # =====================================
 # TRADINGVIEW LINK SECTION
 # =====================================
-
-st.header("📈 Open TradingView Chart")
-
 # Use first column as Company Name
 company_col = strong_stocks.columns[0]
 
