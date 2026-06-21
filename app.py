@@ -470,7 +470,10 @@ company_col = strong_stocks.columns[0]
 # Use Symbol column
 symbol_col = "Symbol"
 
+
 strong_stocks["Display"] = (
+    strong_stocks[company_col].astype(str)
+    + " ("
     + strong_stocks[symbol_col].astype(str)
     + ")"
 )
