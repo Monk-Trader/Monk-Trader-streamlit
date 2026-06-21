@@ -456,16 +456,15 @@ st.header("🏆 Top Strong Stocks")
 st.markdown("---")
 st.header("📈 TradingView Chart")
 
-import streamlit.components.v1 as components
-
 components.html(
 """
+<!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div id="tradingview_chart"></div>
+  <div class="tradingview-widget-container__widget"></div>
 
   <script type="text/javascript"
-    src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-    async>
+  src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+  async>
   {
     "autosize": true,
     "symbol": "NSE:SBIN",
@@ -480,8 +479,9 @@ components.html(
   }
   </script>
 </div>
+<!-- TradingView Widget END -->
 """,
-height=700,
+height=700
 )
 
 strong_stocks = load_strong_stocks()
