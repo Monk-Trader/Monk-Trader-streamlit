@@ -456,19 +456,29 @@ st.markdown("---")
 # =====================================
 
 st.markdown("---")
+st.markdown("---")
 st.header("📈 Open TradingView Chart")
 
-selected_symbol = st.selectbox(
-    "Select Stock",
-    strong_stocks["Symbol"]
+strong_stocks["Display"] = (
+    strong_stocks["Company Name"]
+    + " ("
+    + strong_stocks["Symbol"]
+    + ")"
 )
 
+selected = st.selectbox(
+    "Select Stock",
+    strong_stocks["Display"]
+)
+
+symbol = selected.split("(")[1].replace(")", "")
+
 tv_url = (
-    f"https://www.tradingview.com/chart/?symbol=NSE:{selected_symbol}"
+    f"https://www.tradingview.com/chart/?symbol=NSE:{symbol}"
 )
 
 st.link_button(
-    "🚀 Open TradingView",
+    "📊 Open Chart in TradingView",
     tv_url
 )
 
