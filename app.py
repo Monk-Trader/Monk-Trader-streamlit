@@ -451,34 +451,11 @@ st.markdown("---")
 
 st.header("🏆 Top Strong Stocks")
 st.markdown("---")
-st.header("📈 TradingView Chart")
+st.header("TradingView Test")
 
-components.html(
-"""
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-
-  <script type="text/javascript"
-  src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-  async>
-  {
-    "autosize": true,
-    "symbol": "NSE:SBIN",
-    "interval": "D",
-    "timezone": "Asia/Kolkata",
-    "theme": "dark",
-    "style": "1",
-    "locale": "en",
-    "allow_symbol_change": true,
-    "calendar": false,
-    "support_host": "https://www.tradingview.com"
-  }
-  </script>
-</div>
-<!-- TradingView Widget END -->
-""",
-height=700
+components.iframe(
+    "https://www.tradingview.com/chart/?symbol=NSE%3ASBIN",
+    height=700
 )
 
 strong_stocks = load_strong_stocks()
