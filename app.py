@@ -456,18 +456,34 @@ st.markdown("---")
 
 st.header("🏆 Top Strong Stocks")
 st.markdown("---")
+
+
+# =====================================
+# LOAD STRONG STOCKS
+# =====================================
+
+strong_stocks = load_strong_stocks()
+
 # =====================================
 # TRADINGVIEW LINK SECTION
 # =====================================
 
 st.markdown("---")
-st.markdown("---")
 st.header("📈 Open TradingView Chart")
 
+# Check available columns
+st.write("Columns Found:", strong_stocks.columns.tolist())
+
+# Use first column as Company Name
+company_col = strong_stocks.columns[0]
+
+# Use Symbol column
+symbol_col = "Symbol"
+
 strong_stocks["Display"] = (
-    strong_stocks["Company Name"]
+    strong_stocks[company_col].astype(str)
     + " ("
-    + strong_stocks["Symbol"]
+    + strong_stocks[symbol_col].astype(str)
     + ")"
 )
 
@@ -487,7 +503,15 @@ st.link_button(
     tv_url
 )
 
-strong_stocks = load_strong_stocks()
+# =====================================
+# STRONG STOCK TABLE
+# =====================================
+
+st.dataframe(
+    strong_stocks,
+    use_container_width=True,
+    hide_index=True
+)
 
 st.dataframe(
     strong_stocks,
