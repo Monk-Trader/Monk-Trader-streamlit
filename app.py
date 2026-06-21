@@ -465,7 +465,7 @@ components.html(
     "symbols": [
       [
         "State Bank",
-        "NSE:SBIN|1D"
+        "NASDAQ:AAPL|1D"
       ]
     ],
     "chartOnly": false,
