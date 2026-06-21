@@ -451,34 +451,25 @@ st.markdown("---")
 
 st.header("🏆 Top Strong Stocks")
 st.markdown("---")
-st.header("📈 TradingView Widget Test")
+# =====================================
+# TRADINGVIEW LINK SECTION
+# =====================================
 
-components.html(
-"""
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
+st.markdown("---")
+st.header("📈 Open TradingView Chart")
 
-  <script type="text/javascript"
-  src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-  async>
-  {
-    "symbols": [
-      [
-        "State Bank",
-        "NASDAQ:AAPL|1D"
-      ]
-    ],
-    "chartOnly": false,
-    "width": "100%",
-    "height": "500",
-    "locale": "en",
-    "colorTheme": "dark",
-    "autosize": true
-  }
-  </script>
-</div>
-""",
-height=550
+selected_symbol = st.selectbox(
+    "Select Stock",
+    strong_stocks["Symbol"]
+)
+
+tv_url = (
+    f"https://www.tradingview.com/chart/?symbol=NSE:{selected_symbol}"
+)
+
+st.link_button(
+    "🚀 Open TradingView",
+    tv_url
 )
 
 strong_stocks = load_strong_stocks()
