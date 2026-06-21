@@ -451,30 +451,22 @@ st.plotly_chart(
     fig,
     use_container_width=True
 )
+# =====================================
+# TOP STRONG STOCKS
+# =====================================
 
 st.markdown("---")
-
 st.header("🏆 Top Strong Stocks")
-# =====================================
-# LOAD STRONG STOCKS
-# =====================================
 
 strong_stocks = load_strong_stocks()
 
-# =====================================
-# TRADINGVIEW LINK SECTION
-# =====================================
-# Use first column as Company Name
-company_col = strong_stocks.columns[0]
-
-# Use Symbol column
-symbol_col = "Symbol"
-
+# TradingView Link
+st.subheader("📈 Open TradingView Chart")
 
 strong_stocks["Display"] = (
-    strong_stocks[company_col].astype(str)
+    strong_stocks["Company Name"]
     + " ("
-    + strong_stocks[symbol_col].astype(str)
+    + strong_stocks["Symbol"]
     + ")"
 )
 
@@ -485,31 +477,19 @@ selected = st.selectbox(
 
 symbol = selected.split("(")[1].replace(")", "")
 
-tv_url = (
-    f"https://www.tradingview.com/symbols/NSE-{symbol}/"
-)
+tv_url = f"https://www.tradingview.com/symbols/NSE-{symbol}/"
 
 st.link_button(
     "📊 Open Chart in TradingView",
     tv_url
 )
 
-# =====================================
-# STRONG STOCK TABLE
-# =====================================
-
+# Stock Table (ONLY ONCE)
 st.dataframe(
     strong_stocks,
     use_container_width=True,
     hide_index=True
 )
-
-st.dataframe(
-    strong_stocks,
-    use_container_width=True,
-    hide_index=True
-)
-
 # =====================================
 # FOOTER
 # =====================================
