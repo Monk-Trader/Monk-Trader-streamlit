@@ -38,10 +38,7 @@ except:
 
 
 @st.cache_data(ttl=3600)
-
-@st.cache_data
 def load_strong_stocks():
-
     return pd.read_csv("Strong_Stocks.csv")
     
 def get_data():
