@@ -455,9 +455,6 @@ st.plotly_chart(
 st.markdown("---")
 
 st.header("🏆 Top Strong Stocks")
-st.markdown("---")
-
-
 # =====================================
 # LOAD STRONG STOCKS
 # =====================================
@@ -468,7 +465,6 @@ strong_stocks = load_strong_stocks()
 # TRADINGVIEW LINK SECTION
 # =====================================
 
-st.markdown("---")
 st.header("📈 Open TradingView Chart")
 
 # Use first column as Company Name
