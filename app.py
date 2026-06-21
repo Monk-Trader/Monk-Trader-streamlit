@@ -471,9 +471,6 @@ strong_stocks = load_strong_stocks()
 st.markdown("---")
 st.header("📈 Open TradingView Chart")
 
-# Check available columns
-st.write("Columns Found:", strong_stocks.columns.tolist())
-
 # Use first column as Company Name
 company_col = strong_stocks.columns[0]
 
@@ -495,7 +492,7 @@ selected = st.selectbox(
 symbol = selected.split("(")[1].replace(")", "")
 
 tv_url = (
-    f"https://www.tradingview.com/chart/?symbol=NSE:{symbol}"
+    f"https://www.tradingview.com/symbols/NSE-{symbol}/"
 )
 
 st.link_button(
