@@ -37,9 +37,14 @@ except:
     visitor_count = "N/A"
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data
 def load_strong_stocks():
-    return pd.read_csv("Strong_Stocks.csv")
+    df = pd.read_csv("Strong_Stocks.csv")
+
+    # Remove accidental spaces
+    df.columns = df.columns.str.strip()
+
+    return df
     
 def get_data():
     df = yf.download("^NSEI", start="2013-01-01", progress=False)
