@@ -1,3 +1,4 @@
+import streamlit.components.v1 as components
 import requests
 from datetime import datetime
 import streamlit as st
@@ -452,6 +453,38 @@ st.plotly_chart(
 st.markdown("---")
 
 st.header("🏆 Top Strong Stocks")
+st.markdown("---")
+st.header("📈 TradingView Chart")
+
+components.html(
+"""
+<div class="tradingview-widget-container">
+  <div id="tradingview_chart"></div>
+
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+    "width": "100%",
+    "height": 600,
+    "symbol": "NSE:NIFTY",
+    "interval": "D",
+    "timezone": "Asia/Kolkata",
+    "theme": "dark",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#0E1117",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_chart"
+  }
+  );
+  </script>
+</div>
+""",
+height=650,
+)
 
 strong_stocks = load_strong_stocks()
 
